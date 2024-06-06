@@ -11,10 +11,12 @@ class Auth_model extends CI_Model{
         $conPassword=$this->input->post('conPass');
         
         if($password == $conPassword){
+            $roles = "customer";
             $data=array(
                 "name"=>$this->input->post('name'),
                 "password"=>$password,
                 "email"=>$this->input->post('email'),
+                "roles"=>$roles,
             );
             $this->db->insert('users',$data);    
             redirect('/Auth');
