@@ -66,6 +66,15 @@ class Auth_model extends CI_Model{
             echo "Error: " .this->db->error();
         }
     }
+
+    public function get_user_id($id){
+        return $this->db->get_where('user',['id'=>$id])->row_array();
+    }
+
+    public function update_status($id, $status){
+        $this->db->where('id',$id);
+        $this->db->update('user',['status'=>$status]);
+    }
 }
 
 ?>
