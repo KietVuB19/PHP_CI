@@ -39,11 +39,17 @@ class Auth_model extends CI_Model{
         if($res>=1){
             $row = $query->row();
             $user_roles=$row->roles;
-            if($user_roles == 'customer'){
-                redirect('Auth/cus_home');
+            $user_status = $row->status;
+            if($user_status == 1){
+                if($user_roles == 'customer'){
+                    redirect('Auth/cus_home');
+                }
+                else{
+                    redirect('Auth/admin_home');
+                }
             }
             else{
-                redirect('Auth/admin_home');
+                redirect('Auth');
             }
         }
         else{

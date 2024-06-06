@@ -17,6 +17,7 @@
 				<th>Email</th>
 				<th>Password</th>
 				<th>Roles</th>
+				<th>Status</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,6 +29,11 @@
 						<td><?php echo $user['email']; ?></td>
 						<td><?php echo $user['password']; ?></td>
 						<td><?php echo $user['roles']; ?></td>
+						<?php if ($user['status'] == "1"): ?>
+							<td>Active</td>
+						<?php else: ?>
+							<td>Disable</td>
+						<?php endif ?>
 					</tr>
 				<?php endforeach ;?>
 			<?php else: ?>
