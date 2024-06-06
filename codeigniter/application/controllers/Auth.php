@@ -25,9 +25,10 @@ class Auth extends CI_Controller {
 	{
 		$this->load->view('Auth/cus_home');
 	}
-
-	public function admin_home()
-	{
-		$this->load->view('Auth/admin_home');
-	}
+	
+	public function admin_home(){
+        $this->load->model('Auth_model');
+        $data['users']=$this->Auth_model->get_users();
+        $this->load->view('Auth/admin_home',$data);
+    } 
 }

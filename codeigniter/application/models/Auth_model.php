@@ -32,7 +32,7 @@ class Auth_model extends CI_Model{
         $this->db->where('password',$password);
         
         $query=$this->db->get('users');
-        $res=$query->num_rows($query);
+        $res=$query->num_rows();
         
         if($res>=1){
             $row = $query->row();
@@ -45,13 +45,18 @@ class Auth_model extends CI_Model{
             }
         }
         else{
-            redirect('/Auth');
+            redirect('Auth');
         }
     }
 
     public function get_users(){
         $query=$this->db->get('users');
-        return $query->result();
+        if($query){
+            return $query->result_array();
+        }
+        else{
+            echo "Error: " .this->db->error();
+        }
     }
 }
 
