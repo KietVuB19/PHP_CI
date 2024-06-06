@@ -6,7 +6,12 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta name="description" content="This is a login page template based on Bootstrap 5">
 	<title>Bootstrap 5 Login Page</title>
-    <link rel="stylesheet" href="all.css">
+    <link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/all.css'; ?>">
+	<link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/toast/toast.min.css'; ?>">
+	
+	<!-- <script src= "<?php echo site_url();?> css_fold/toast/jqm.js"></script>
+	<script src= "<?php echo site_url();?> css_fold/toast/toast.js"></script> -->
+
  </head>
 
 <body>
