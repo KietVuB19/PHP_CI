@@ -48,6 +48,11 @@ class Auth_model extends CI_Model{
             redirect('/Auth');
         }
     }
+
+    public function get_users(){
+        $query=$this->db->get('users');
+        return $query->result();
+    }
 }
 
 ?>

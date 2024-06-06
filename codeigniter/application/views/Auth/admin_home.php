@@ -19,7 +19,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php if (!empty($users)): ?> 
+			<?php if (!empty($users)): ?>
 				<?php foreach ($users as $user):?>
 					<tr>
 						<td><?php echo $user['id']; ?></td>
