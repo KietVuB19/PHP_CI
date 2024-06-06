@@ -7,10 +7,37 @@
 </head>
 
 <body>
-	<div class="card-footer py-3 border-0">
-		<div class="text-center">
-			<a href="<?php echo site_url();?>Auth" class="text-dark">Log out</a>
-		</div>
+	<h1>List Account</h1>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name </th>
+				<th>Email</th>
+				<th>Password</th>
+				<th>Roles</th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php if (!empty($users)): ?> 
+				<?php foreach ($users as $user):?>
+					<tr>
+						<td><?php echo $user['id']; ?></td>
+						<td><?php echo $user['name']; ?></td>
+						<td><?php echo $user['email']; ?></td>
+						<td><?php echo $user['password']; ?></td>
+						<td><?php echo $user['roles']; ?></td>
+					</tr>
+				<?php endforeach ;?>
+			<?php else: ?>
+				<tr>
+					<td colspan =5>No user</td>
+				</tr>
+			<?php endif ?>
+		</tbody>
+	</table>
+	<div>
+		<a href="<?php echo site_url();?>Auth" class="text-dark">Log out</a>
 	</div>
 </body>
 </html>
