@@ -3,6 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auth extends CI_Controller {
 
+	public function __construct(){
+        parent::__construct();
+		$this->load->model('Auth_model');
+    }
+
 	public function index()
 	{
 		$this->load->view('Auth/login');
@@ -14,11 +19,11 @@ class Auth extends CI_Controller {
 	}
 
 	public function registration_form(){
-		$this->auth_model->register_user();
+		$this->Auth_model->register_user();
 	}
 
 	public function login_form(){
-		$this->auth_model->login_user();
+		$this->Auth_model->login_user();
 	}	
 
 	public function cus_home()
@@ -27,13 +32,12 @@ class Auth extends CI_Controller {
 	}
 
 	public function admin_home(){
-        $this->load->model('Auth_model');
         $data['users']=$this->Auth_model->get_users();
         $this->load->view('Auth/admin_home',$data);
     } 
 
 	public function change_status($id){
-		$user=$this->auth_model->get_user_id($id);
+		$user=$this->Auth_model->get_user_id($id);
 		if($user){
 			$status = $user['status'];
 			if($status == 0){

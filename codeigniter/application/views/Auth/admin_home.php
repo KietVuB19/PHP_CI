@@ -34,7 +34,7 @@
 						<?php else: ?>
 							<td>Disable</td>
 						<?php endif ?>
-						<td><a href= "<?php echo site_url('Auth_model/change_status' . $user['id']); ?>">Change status</a></td>
+						<td><a href= "<?php echo site_url('/Auth/change_status/'.$user['id']); ?>">Change status</a></td>
 					</tr>
 				<?php endforeach ;?>
 			<?php else: ?>

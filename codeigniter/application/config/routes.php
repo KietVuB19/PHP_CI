@@ -52,4 +52,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-// $route['admin/viewRecord'] = 'Auth/admin_home';
+$route['Auth/change_status/(:num)'] = 'Auth/change_status/$1';
