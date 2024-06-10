@@ -5,7 +5,9 @@ class Auth extends CI_Controller {
 
 	public function __construct(){
         parent::__construct();
+		$this->load->library('session');
 		$this->load->model('Auth_model');
+		
     }
 
 	public function index()
@@ -32,7 +34,16 @@ class Auth extends CI_Controller {
 	}
 
 	public function admin_home(){
-        $data['users']=$this->Auth_model->get_users();
+		$search = $this->input->post('search');
+		if($search){
+			$this->session->set_userdata('search',$search);	
+		}
+		else{
+			$search = $this->session->userdata('search');
+		}
+		$data['users']=$this->Auth_model->search_user($search);	
+		$data['search']=$search;
+
         $this->load->view('Auth/admin_home',$data);
     } 
 
@@ -50,5 +61,4 @@ class Auth extends CI_Controller {
 		}
 		redirect('Auth/admin_home');
 	}
-
 }

@@ -9,6 +9,13 @@
 
 <body>
 	<h1>List Account</h1>
+	<?php echo form_open('Auth/admin_home');?>
+		<div class ="search_box">
+			<input type="text" placeholder="Search name" value="<?php echo isset($search) ? $search:''; ?> ">
+			<button type="submit">Search</button>
+		</div>
+	<?php echo form_close();?>
+
 	<table>
 		<thead>
 			<tr>
@@ -39,7 +46,7 @@
 				<?php endforeach ;?>
 			<?php else: ?>
 				<tr>
-					<td colspan =5>No user</td>
+					<td colspan =7>No user</td>
 				</tr>
 			<?php endif ?>
 		</tbody>

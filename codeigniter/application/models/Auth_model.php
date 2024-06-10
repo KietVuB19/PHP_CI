@@ -75,6 +75,13 @@ class Auth_model extends CI_Model{
         $this->db->where('id',$id);
         $this->db->update('users',['status'=>$status]);
     }
+
+    public function search_user($search= null){
+        if(!empty($search)){
+            $this->db->like('name',$search);    
+        }
+        return $this->db->get('users')->result_array();   
+    }
 }
 
 ?>
