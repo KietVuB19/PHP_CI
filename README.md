@@ -9,13 +9,19 @@
 <br><br>
 2. Setup guide:
 - 2.1. Create new project:   
-  + composer create-project codeigniter/framework codeigniter 3.1.9
+```
+composer create-project codeigniter/framework codeigniter 3.1.9
+```
 - 2.2. Set permission:   
-  + sudo chown -R apache:apache /var/www/html/codeigniter   
-  + sudo chmod -R 755 /var/www/html/codeigniter/application/cache   
-  + sudo chmod -R 755 /var/www/html/codeigniter/application/logs    
-- 2.3. Configure apache (virtual host):  
-  + sudo nano /etc/httpd/conf.d/codeigniter.conf  
+```
+sudo chown -R apache:apache /var/www/html/codeigniter   
+sudo chmod -R 755 /var/www/html/codeigniter/application/cache   
+sudo chmod -R 755 /var/www/html/codeigniter/application/logs    
+```
+- 2.3. Configure apache (virtual host):
+```
+sudo nano /etc/httpd/conf.d/codeigniter.conf
+```  
 - 2.4 Change file codeigniter.conf (file you open on 2.3):   
 ```
 <VirtualHost *:80>
@@ -32,8 +38,10 @@
     CustomLog /var/log/httpd/project_name_access.log combined
 </VirtualHost>
 ```
-- 2.5 Restart apache  
-  + sudo systemctl restart httpd  
+- 2.5 Restart apache
+```
+sudo systemctl restart httpd  
+```
 - 2.6 Run project on browser (FireFox)
   + Type http://localhost on browser
 <br><br>
