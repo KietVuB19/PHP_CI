@@ -7,14 +7,14 @@
 - Codeigniter: 3.1.9
 - Composer: 2.7.6
 
-
+<br />
 2. Setup guide:
 - 2.1. Create new project: <br />
   composer create-project codeigniter/framework codeigniter 3.1.9
 - 2.2. Set permission: <br />
-  sudo chown -R apache:apache /var/www/html/codeigniter
-  sudo chmod -R 755 /var/www/html/codeigniter/application/cache
-  sudo chmod -R 755 /var/www/html/codeigniter/application/logs  
+  sudo chown -R apache:apache /var/www/html/codeigniter <br />
+  sudo chmod -R 755 /var/www/html/codeigniter/application/cache <br />
+  sudo chmod -R 755 /var/www/html/codeigniter/application/logs  <br />
 - 2.3. Configure apache (virtual host):<br />
   sudo nano /etc/httpd/conf.d/codeigniter.conf
 - 2.4 Change file codeigniter.conf (file you open on 2.3): <br />
@@ -34,8 +34,7 @@
 - 2.5 Restart apache<br />
 sudo systemctl restart httpd<br />
 - 2.6 http://localhost (on browser to open)<br />
-
-  
+<br />
 4. Function (currently):
 - Register/Login/Logout with session
 - Search user by name
