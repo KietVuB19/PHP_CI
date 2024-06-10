@@ -6,7 +6,7 @@
 - PHP: 8.2.20 (cli)
 - Codeigniter: 3.1.9
 - Composer: 2.7.6
-
+<br><br>
 2. Setup guide:
 - 2.1. Create new project:   
   + composer create-project codeigniter/framework codeigniter 3.1.9
@@ -17,25 +17,26 @@
 - 2.3. Configure apache (virtual host):  
   + sudo nano /etc/httpd/conf.d/codeigniter.conf  
 - 2.4 Change file codeigniter.conf (file you open on 2.3):   
-  <VirtualHost *:80>  
-        ServerAdmin root  
-        ServerName localhost  
-        DocumentRoot /var/www/html/codeigniter  
-        <Directory /var/www/html/codeigniter>  
-        AllowOverride All  
-        Allow from all  
-        Require all granted  
-    </Directory>  
-  ErrorLog /var/log/httpd/codeigniter_error.log
+```
+<VirtualHost *:80>
+    ServerAdmin admin@example.com
+    DocumentRoot /var/www/html/project_name
 
-  CustomLog /var/log/httpd/codeigniter_access.log combined   
+    <Directory /var/www/html/project_name>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog /var/log/httpd/project_name_error.log
+    CustomLog /var/log/httpd/project_name_access.log combined
 </VirtualHost>
-
+```
 - 2.5 Restart apache  
   + sudo systemctl restart httpd  
 - 2.6 Run project on browser (FireFox)
   + Type http://localhost on browser
-  
-4. Function (currently):
+<br><br>
+3. Function (currently):
 - Register/Login/Logout with session
 - Search user by name
