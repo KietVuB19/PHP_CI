@@ -5,8 +5,11 @@
 - MySQL: Ver 8.4.0 for Linux on x86 64 (MySQL Community Server - GPL)
 - PHP: 8.2.20 (cli)
 - Codeigniter: 3.1.9
+- Composer: 2.7.6
+2. Install guide:
 
-2. Function (currently):
+  
+3. Function (currently):
 - For everyone:
   + Register/Login/Logout with session
 - For Admin:
