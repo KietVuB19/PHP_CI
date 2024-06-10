@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Home</title>
-    <h1>Home page ADMIN: </h1>
+    <h1>Home page ADMIN: <?php echo $this->session->userdata('log_in_name'); ?></h1>
 	<link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/table.css'; ?>">
 </head>
 
@@ -52,7 +52,7 @@
 		</tbody>
 	</table>
 	<div>
-		<a href="<?php echo site_url();?>Auth" class="text-dark">Log out</a>
+		<a href="<?php echo site_url('/Auth/logout/');?>" class="text-dark">Log out</a>
 	</div>
 </body>
 </html>

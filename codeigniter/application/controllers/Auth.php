@@ -28,12 +28,31 @@ class Auth extends CI_Controller {
 		$this->Auth_model->login_user();
 	}	
 
+	public function logout(){
+		$this->Auth_model->logout_user();
+	}
+
 	public function cus_home()
 	{
+		if(!$this->session->userdata('logged_in')) {
+			redirect('Auth');	
+		}
+
+		if($this->session->userdata('role') != 'customer'){
+			redirect('Auth/admin_home');		
+		}
 		$this->load->view('Auth/cus_home');
 	}
 
 	public function admin_home(){
+		if(!$this->session->userdata('logged_in')) {
+			redirect('Auth');	
+		}
+
+		if($this->session->userdata('role') != 'admin'){
+			redirect('Auth/cus_home');		
+		}
+
 		$search = $this->input->post('search');
 		if(!$search){
 			$data['users']=[];		

@@ -35,12 +35,15 @@ class Auth_model extends CI_Model{
         
         $query=$this->db->get('users');
         $res=$query->num_rows();
-        
         if($res>=1){
             $row = $query->row();
             $user_roles=$row->roles;
             $user_status = $row->status;
             if($user_status == 1){
+                $this->session->set_userdata('logged_in',true);
+                $this->session->set_userdata('log_in_name',$name);
+                $this->session->set_userdata('role',$user_roles);
+                
                 if($user_roles == 'customer'){
                     redirect('Auth/cus_home');
                 }
@@ -57,13 +60,20 @@ class Auth_model extends CI_Model{
         }
     }
 
+    public function logout_user(){
+        $this->session->unset_userdata('log_in_name');
+        $this->session->unset_userdata('role');
+        $this->session->sess_destroy();
+        redirect('Auth/');
+    }
+
     public function get_users(){
         $query=$this->db->get('users');
         if($query){
             return $query->result_array();
         }
         else{
-            echo "Error: " .this->db->error();
+            echo "Error: " .$this->db->error();
         }
     }
 
