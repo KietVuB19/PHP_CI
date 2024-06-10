@@ -15,23 +15,25 @@
   sudo chmod -R 755 /var/www/html/codeigniter/application/cache   
   sudo chmod -R 755 /var/www/html/codeigniter/application/logs    
 - 2.3. Configure apache (virtual host):  
-  sudo nano /etc/httpd/conf.d/codeigniter.conf
+  sudo nano /etc/httpd/conf.d/codeigniter.conf  
 - 2.4 Change file codeigniter.conf (file you open on 2.3):   
   <VirtualHost *:80>  
-    ServerAdmin root  
-    ServerName localhost  
-    DocumentRoot /var/www/html/codeigniter  
-    <Directory /var/www/html/codeigniter>  
+        ServerAdmin root  
+        ServerName localhost  
+        DocumentRoot /var/www/html/codeigniter  
+        <Directory /var/www/html/codeigniter>  
         AllowOverride All  
         Allow from all  
         Require all granted  
     </Directory>  
-    ErrorLog /var/log/httpd/codeigniter_error.log  
-    CustomLog /var/log/httpd/codeigniter_access.log combined  
-</VirtualHost>  <br />
+  ErrorLog /var/log/httpd/codeigniter_error.log
+
+  CustomLog /var/log/httpd/codeigniter_access.log combined   
+</VirtualHost>
+
 - 2.5 Restart apache  
 sudo systemctl restart httpd  
-- 2.6 http://localhost (on browser to open)   
+- 2.6 http://localhost (on browser to open)  
   
 4. Function (currently):
 - Register/Login/Logout with session
