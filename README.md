@@ -10,9 +10,5 @@
 
   
 3. Function (currently):
-- For everyone:
-  + Register/Login/Logout with session
-- For Admin:
-  + Search user by name
-- For customer:
-  + Not yet 
+- Register/Login/Logout with session
+- Search user by name
