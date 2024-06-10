@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Home</title>
-    <h1>Home page ADMIN</h1>
+    <h1>Home page ADMIN: </h1>
 	<link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/table.css'; ?>">
 </head>
 
