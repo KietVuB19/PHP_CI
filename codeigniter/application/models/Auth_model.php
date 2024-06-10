@@ -80,7 +80,8 @@ class Auth_model extends CI_Model{
         if(!empty($search)){
             $this->db->like('name',$search);    
         }
-        return $this->db->get('users')->result_array();   
+        $query = $this->db->get('users');
+        return $query->result_array();   
     }
 }
 

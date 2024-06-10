@@ -35,16 +35,16 @@ class Auth extends CI_Controller {
 
 	public function admin_home(){
 		$search = $this->input->post('search');
-		if($search){
-			$this->session->set_userdata('search',$search);	
+		if(!$search){
+			$data['users']=[];		
+		    $this->load->view('Auth/admin_home',$data);
 		}
 		else{
-			$search = $this->session->userdata('search');
+			$this->session->set_userdata('search',$search);
+			$data['users']=$this->Auth_model->search_user($search);	
+			$data['search']=$search;
+			$this->load->view('Auth/admin_home',$data);
 		}
-		$data['users']=$this->Auth_model->search_user($search);	
-		$data['search']=$search;
-
-        $this->load->view('Auth/admin_home',$data);
     } 
 
 	public function change_status($id){
