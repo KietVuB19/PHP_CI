@@ -6,9 +6,9 @@ CREATE TABLE IF NOT EXISTS `users` (
     `mail` varchar(45),
     `password` varchar(45),
     `roles` varchar(45),
-    `status` Boolean dfault 1
-    
-    
+    `status` Boolean default 1
+    `attempts` int(11) NOT NULL,
+    `last_attempt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     KEY `ci_sessions_timestamp` (`timestamp`)
 );
 

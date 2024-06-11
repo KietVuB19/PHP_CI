@@ -32,19 +32,6 @@ class Auth_model extends CI_Model{
 
         $this->db->where('name',$name);
         $this->db->where('password',$password);
-        
-        //Login try 5 times, failed-> lock 5mins
-        $attempts_data = $this->User_model->get_login_attempts($username);
-        if ($attempts_data && $attempts_data->attempts >= 5) {
-            $last_attempt_time = strtotime($attempts_data->last_attempt);
-            $current_time = time();
-            if (($current_time - $last_attempt_time) < 300) { 
-                echo "Try again after 5 minutes.";
-                return;
-            } else {
-                $this->User_model->reset_login_attempts($username);
-            }
-        }
 
         $query=$this->db->get('users');
         $res=$query->num_rows();
@@ -106,6 +93,41 @@ class Auth_model extends CI_Model{
         }
         $query = $this->db->get('users');
         return $query->result_array();   
+    }
+
+    public function is_username_taken($name) {
+        $this->db->where('name', $name);
+        $query = $this->db->get('users');
+        return $query->num_rows() > 0;
+    }
+
+    //Login try 5times / failed lop 5 mins
+    public function get_login_attempts($username) {
+        $this->db->where('username', $username);
+        $query = $this->db->get('login_attempts');
+        return $query->row();
+    }
+
+    public function increment_login_attempts($username) {
+        $attempts_data = $this->get_login_attempts($username);
+        if ($attempts_data) {
+            $this->db->where('username', $username);
+            $this->db->update('login_attempts', array(
+                'attempts' => $attempts_data->attempts + 1,
+                'last_attempt' => date('Y-m-d H:i:s')
+            ));
+        } else {
+            $this->db->insert('login_attempts', array(
+                'username' => $username,
+                'attempts' => 1,
+                'last_attempt' => date('Y-m-d H:i:s')
+            ));
+        }
+    }
+
+    public function reset_login_attempts($username) {
+        $this->db->where('username', $username);
+        $this->db->delete('login_attempts');
     }
 }
 

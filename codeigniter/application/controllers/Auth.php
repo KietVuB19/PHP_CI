@@ -26,6 +26,34 @@ class Auth extends CI_Controller {
 	}
 
 	public function login_form(){
+		//Login try 5 times, failed-> lock 5mins
+		$username = $this->input->post('username');
+        $password = $this->input->post('password');
+
+        $attempts_data = $this->User_model->get_login_attempts($username);
+        if ($attempts_data && $attempts_data->attempts >= 5) {
+            $last_attempt_time = strtotime($attempts_data->last_attempt);
+            $current_time = time();
+            if (($current_time - $last_attempt_time) < 300) { 
+                echo "Try again after 5 minutes.";
+                redirect('/');
+            } else {
+                $this->User_model->reset_login_attempts($username);
+            }
+        }
+		//validate
+		$user = $this->User_model->login($username, $password);
+        if ($user) {
+            // reset attem to 0 when success
+            $this->User_model->reset_login_attempts($username);
+            $this->session->set_userdata('user_id', $user->id);
+            redirect('dashboard');
+        } else {
+            //login attem +=1 when failed
+            $this->User_model->increment_login_attempts($username);
+            echo "Invalid username or password.";
+        }
+
 		$this->Auth_model->login_user();
 	}	
 
