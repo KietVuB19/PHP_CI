@@ -16,49 +16,11 @@ class Auth_model extends CI_Model{
         return $query->num_rows() > 0;
     }
 
-    public function login_user($name, $password){
+    public function check_user_exits($name, $password){
         $this->db->where('name',$name);
         $this->db->where('password',$password);
-        
-        //Login try 5 times, failed-> lock 5mins
-        $attempts_data = $this->User_model->get_login_attempts($username);
-        if ($attempts_data && $attempts_data->attempts >= 5) {
-            $last_attempt_time = strtotime($attempts_data->last_attempt);
-            $current_time = time();
-            if (($current_time - $last_attempt_time) < 300) { 
-                echo "Try again after 5 minutes.";
-                return;
-            } else {
-                $this->User_model->reset_login_attempts($username);
-            }
-        }
-
-        $query=$this->db->get('users');
-        $res=$query->num_rows();
-        if($res>=1){
-            $row = $query->row();
-            $user_roles=$row->roles;
-            $user_status = $row->status;
-            //check status (disable/active)
-            if($user_status == 1){
-                $this->session->set_userdata('logged_in',true);
-                $this->session->set_userdata('log_in_name',$name);
-                $this->session->set_userdata('role',$user_roles);
-                
-                if($user_roles == 'customer'){
-                    redirect('Auth/cus_home');
-                }
-                else{
-                    redirect('Auth/admin_home');
-                }
-            }
-            else{
-                redirect('Auth');
-            }
-        }
-        else{
-            redirect('Auth');
-        }
+        return $query=$this->db->get('users');
+        // return $query->num_rows();
     }
 
     public function logout_user(){
@@ -95,10 +57,9 @@ class Auth_model extends CI_Model{
         return $query->result_array();   
     }
 
-    //Login try 5times / failed lop 5 mins
     public function get_login_attempts($name) {
         $this->db->where('name', $name);
-        $query = $this->db->get('login_attempts');
+        $query = $this->db->get('users');
         return $query->row();
     }
 
@@ -106,7 +67,7 @@ class Auth_model extends CI_Model{
         $attempts_data = $this->get_login_attempts($name);
         if ($attempts_data) {
             $this->db->where('name', $name);
-            $this->db->update('login_attempts', array(
+            $this->db->update('users', array(
                 'attempts' => $attempts_data->attempts + 1,
                 'last_attempt' => date('Y-m-d H:i:s')
             ));
@@ -120,8 +81,9 @@ class Auth_model extends CI_Model{
     }
 
     public function reset_login_attempts($name) {
+        $data = array('attempts'=>0);
         $this->db->where('name', $name);
-        $this->db->delete('login_attempts');
+        $this->db->update('users',$data);
     }
 }
 

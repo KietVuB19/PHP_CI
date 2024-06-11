@@ -48,7 +48,7 @@
                         </div>
 						<div class="card-footer py-3 border-0">
 							<div class="text-center">
-								Don't have an account? <a href="Auth/register" class="text-dark">Create One</a>
+								Don't have an account ? <a href="<?php echo site_url('/Auth/register');?>" class="text-dark">Create one</a>
 							</div>
 						</div>
 					</div>

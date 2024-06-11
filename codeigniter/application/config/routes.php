@@ -53,3 +53,4 @@ $route['default_controller'] = 'Auth';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['Auth/change_status/(:num)'] = 'Auth/change_status/$1';
+$route['Auth/register'] = 'Auth/show_regis';
