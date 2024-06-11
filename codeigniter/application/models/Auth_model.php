@@ -6,67 +6,27 @@ class Auth_model extends CI_Model{
         $this->load->database();
     }
 
-    public function register_user(){
-        $password=$this->input->post('password');
-        $conPassword=$this->input->post('conPass');
-        
-        if($password == $conPassword){
-            $roles = "customer";
-            $data=array(
-                "name"=>$this->input->post('name'),
-                "password"=>$password,
-                "email"=>$this->input->post('email'),
-                "roles"=>$roles,
-            );
+    public function register_user($data){
             $this->db->insert('users',$data);    
-            redirect('/Auth');
-        }
-        else{
-            redirect('Auth/register');
-        }
     }
 
-    public function login_user(){
-        $password=$this->input->post('password');                
-        $name=$this->input->post('name');
+    public function is_name_taken($name) {
+        $this->db->where('name', $name);
+        $query = $this->db->get('users');
+        return $query->num_rows() > 0;
+    }
 
+    public function login_user($name, $password){
         $this->db->where('name',$name);
         $this->db->where('password',$password);
-
-        $query=$this->db->get('users');
-        $res=$query->num_rows();
-        if($res>=1){
-            $row = $query->row();
-            $user_roles=$row->roles;
-            $user_status = $row->status;
-            //check status (disable/active)
-            if($user_status == 1){
-                $this->session->set_userdata('logged_in',true);
-                $this->session->set_userdata('log_in_name',$name);
-                $this->session->set_userdata('role',$user_roles);
-                
-                if($user_roles == 'customer'){
-                    redirect('Auth/cus_home');
-                }
-                else{
-                    redirect('Auth/admin_home');
-                }
-            }
-            else{
-                redirect('Auth');
-            }
-        }
-        else{
-            redirect('Auth');
-        }
     }
 
-    public function logout_user(){
-        $this->session->unset_userdata('log_in_name');
-        $this->session->unset_userdata('role');
-        $this->session->sess_destroy();
-        redirect('Auth/');
-    }
+    // public function logout_user(){
+    //     $this->session->unset_userdata('log_in_name');
+    //     $this->session->unset_userdata('role');
+    //     $this->session->sess_destroy();
+    //     redirect('Auth/');
+    // }
 
     public function get_users(){
         $query=$this->db->get('users');
@@ -95,38 +55,32 @@ class Auth_model extends CI_Model{
         return $query->result_array();   
     }
 
-    public function is_username_taken($name) {
-        $this->db->where('name', $name);
-        $query = $this->db->get('users');
-        return $query->num_rows() > 0;
-    }
-
     //Login try 5times / failed lop 5 mins
-    public function get_login_attempts($username) {
-        $this->db->where('username', $username);
+    public function get_login_attempts($name) {
+        $this->db->where('name', $name);
         $query = $this->db->get('login_attempts');
         return $query->row();
     }
 
-    public function increment_login_attempts($username) {
-        $attempts_data = $this->get_login_attempts($username);
+    public function increment_login_attempts($name) {
+        $attempts_data = $this->get_login_attempts($name);
         if ($attempts_data) {
-            $this->db->where('username', $username);
+            $this->db->where('name', $name);
             $this->db->update('login_attempts', array(
                 'attempts' => $attempts_data->attempts + 1,
                 'last_attempt' => date('Y-m-d H:i:s')
             ));
         } else {
             $this->db->insert('login_attempts', array(
-                'username' => $username,
+                'name' => $name,
                 'attempts' => 1,
                 'last_attempt' => date('Y-m-d H:i:s')
             ));
         }
     }
 
-    public function reset_login_attempts($username) {
-        $this->db->where('username', $username);
+    public function reset_login_attempts($name) {
+        $this->db->where('name', $name);
         $this->db->delete('login_attempts');
     }
 }
