@@ -20,7 +20,6 @@ class Auth_model extends CI_Model{
         $this->db->where('name',$name);
         $this->db->where('password',$password);
         return $query=$this->db->get('users');
-        // return $query->num_rows();
     }
 
     public function logout_user(){

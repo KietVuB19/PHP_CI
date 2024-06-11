@@ -29,7 +29,7 @@ class Auth extends CI_Controller {
         
 		
 		if ($this->Auth_model->is_name_taken($name)) {
-            $this->session->set_flashdata('message', 'Name is not available.');
+            $this->session->set_flashdata('message', 'Name is not available');
             redirect('Auth/register');
             return;
         }
@@ -47,7 +47,7 @@ class Auth extends CI_Controller {
             redirect('/Auth');
         }
         else{
-            $this->session->set_flashdata('message', 'Passwords not match.');
+            $this->session->set_flashdata('message', 'Passwords not match');
             redirect('Auth/register');
             return;
         }
@@ -64,8 +64,8 @@ class Auth extends CI_Controller {
             $last_attempt_time = strtotime($attempts_data->last_attempt);
             $current_time = time();
             if (($current_time - $last_attempt_time) < 300) { 
-                redirect('/');
-				echo "Try again after 5 minutes.";
+                $this->session->set_flashdata('msg',"Try again after 5 minutes");
+				redirect('/');
             } else {
                 $this->Auth_model->reset_login_attempts($name);
             }
@@ -102,8 +102,8 @@ class Auth extends CI_Controller {
         }else {
             //login attem +=1 when failed
             $this->Auth_model->increment_login_attempts($name);
-            redirect('Auth');
-			echo "Invalid name or password.";
+            $this->session->set_flashdata('msg',"Invalid name or password");
+			redirect('Auth');
 		}
 	}	
 
