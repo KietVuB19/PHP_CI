@@ -62,25 +62,35 @@ class Auth_model extends CI_Model{
         return $query->row();
     }
 
-    public function increment_login_attempts($name) {
+    public function time_update(){
+        $current_time=new DateTime();
+        $current_time->modify('+7 hours');
+        return $formatted_time = $current_time->format('Y-m-d H:i:s');
+    }
+
+    public function increase_login_attempts($name) {
         $attempts_data = $this->get_login_attempts($name);
+        $current_time=$this->time_update(); 
         if ($attempts_data) {
             $this->db->where('name', $name);
             $this->db->update('users', array(
                 'attempts' => $attempts_data->attempts + 1,
-                'last_attempt' => date('Y-m-d H:i:s')
+                'last_attempt' => $current_time
             ));
         } else {
             $this->db->insert('login_attempts', array(
                 'name' => $name,
                 'attempts' => 1,
-                'last_attempt' => date('Y-m-d H:i:s')
+                'last_attempt' => $current_time
             ));
         }
     }
 
     public function reset_login_attempts($name) {
-        $data = array('attempts'=>0);
+        $current_time=$this->time_update(); 
+        $data = array('attempts'=>0,
+        'last_attempt' => $current_time
+    );
         $this->db->where('name', $name);
         $this->db->update('users',$data);
     }

@@ -5,16 +5,13 @@
 	<meta name="author" content="Muhamad Nauval Azhar">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<meta name="description" content="This is a login page template based on Bootstrap 5">
-	<title>Bootstrap 5 Login Page</title>
+	<title>Register page</title>
     <link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/all.css'; ?>">
 	<link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/toast/toast.min.css'; ?>">
 	
  </head>
 
 <body>
-	<?php if ($this->session->flashdata('message')): ?>
-		<p><?= $this->session->flashdata('message') ?></p>
-	<?php endif; ?>
 	<section class="h-100">
 		<div class="container h-100">
 			<div class="row justify-content-sm-center h-100">
@@ -22,6 +19,9 @@
 					<div class="text-center my-5">
 						<img src="logo.jpg" alt="logo" width="100">
 					</div>
+					<?php if ($this->session->flashdata('msg')): ?>
+						<p style="color: red; font-size:20px; text-align: center"><?= $this->session->flashdata('msg') ?></p>
+					<?php endif; ?>
 					<div class="card shadow-lg">
 						<div class="card-body p-5">
 							<h1 class="fs-4 card-title fw-bold mb-4">Register</h1>
