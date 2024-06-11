@@ -26,16 +26,16 @@ sudo nano /etc/httpd/conf.d/codeigniter.conf
 ```
 <VirtualHost *:80>
     ServerAdmin admin@example.com
-    DocumentRoot /var/www/html/project_name
+    DocumentRoot /var/www/html/codeigniter
 
-    <Directory /var/www/html/project_name>
+    <Directory /var/www/html/codeigniter>
         Options Indexes FollowSymLinks
         AllowOverride All
         Require all granted
     </Directory>
 
-    ErrorLog /var/log/httpd/project_name_error.log
-    CustomLog /var/log/httpd/project_name_access.log combined
+    ErrorLog /var/log/httpd/codeigniter_error.log
+    CustomLog /var/log/httpd/codeigniter_access.log combined
 </VirtualHost>
 ```
 - 2.5 Restart apache
@@ -43,8 +43,11 @@ sudo nano /etc/httpd/conf.d/codeigniter.conf
 sudo systemctl restart httpd  
 ```
 - 2.6 Run project on browser (FireFox)
-  + Type http://localhost on browser
+  + Type http://localhost on browser (you should see the codeigniter homepage)
 <br><br>
 3. Function (currently):
-- Register/Login/Logout with session
-- Search user by name
+- 3.1. Register/Login/Logout with session
+    + Register: Duplicate name is not possible
+    + Login: Log in fail 5 times in a row will lock the user for 5 mins
+- 3.2. Search user by name (for admin)
+- 3.3. Change status of an user: (if user status is disable: the user can not log in)
