@@ -52,11 +52,11 @@ class Auth_model extends CI_Model{
                 }
             }
             else{
-                redirect('Auth');
+                redirect('/');
             }
         }
         else{
-            redirect('Auth');
+            redirect('/');
         }
     }
 
@@ -64,7 +64,7 @@ class Auth_model extends CI_Model{
         $this->session->unset_userdata('log_in_name');
         $this->session->unset_userdata('role');
         $this->session->sess_destroy();
-        redirect('Auth/');
+        redirect('/');
     }
 
     public function get_users(){
