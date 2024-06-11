@@ -77,12 +77,9 @@ class Auth_model extends CI_Model{
                 'attempts' => $attempts_data->attempts + 1,
                 'last_attempt' => $current_time
             ));
-        } else {
-            $this->db->insert('login_attempts', array(
-                'name' => $name,
-                'attempts' => 1,
-                'last_attempt' => $current_time
-            ));
+        }
+        else{
+            return;
         }
     }
 
