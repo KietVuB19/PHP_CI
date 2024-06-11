@@ -12,6 +12,9 @@
  </head>
 
 <body>
+	<?php if ($this->session->flashdata('message')): ?>
+		<p><?= $this->session->flashdata('message') ?></p>
+	<?php endif; ?>
 	<section class="h-100">
 		<div class="container h-100">
 			<div class="row justify-content-sm-center h-100">
