@@ -21,13 +21,12 @@ class Auth extends CI_Controller {
 	}
 
 	public function registration_form(){
-		$this->load->view('Auth/register');
+		// $this->load->view('Auth/register');
 		
 		$password=$this->input->post('password');
         $conPassword=$this->input->post('conPass');
         $name=$this->input->post('name');
-        
-		
+
 		if ($this->Auth_model->is_name_taken($name)) {
             $this->session->set_flashdata('msg', 'Name is taken');
             redirect('Auth/register');
@@ -44,6 +43,7 @@ class Auth extends CI_Controller {
 				"status"=>1,
             ); 
 			$this->Auth_model->register_user($data);    
+			$this->session->set_flashdata('msg_succ', 'Register success');
             redirect('/Auth');
         }
         else{
@@ -59,13 +59,14 @@ class Auth extends CI_Controller {
 		$name = $this->input->post('name');
         $password = $this->input->post('password');
 
-        $attempts_data = $this->Auth_model->get_login_attempts($name);
-		if ($attempts_data && $attempts_data->attempts >= 5) {
-            $last_attempt_time = strtotime($attempts_data->last_attempt);
+        $attempts_data = $this->Auth_model->get_users($name);
+		$total_try = $attempts_data->row();
+		if ($total_try && $total_try->attempts >= 5) {
+            $last_attempt_time = strtotime($total_try->last_attempt);
             $current_time = time();
             if (($current_time - $last_attempt_time) < 300) { 
                 $this->session->set_flashdata('msg',"Try again after 5 minutes");
-				redirect('/');
+				redirect('Auth');
             } else {
                 $this->Auth_model->reset_login_attempts($name);
             }
