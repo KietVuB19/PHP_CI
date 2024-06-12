@@ -1,4 +1,4 @@
-Author: KietVuB19
+Author: KietVuB19  
 Date: 12/06/2024
 
 Required fields are:
@@ -13,14 +13,13 @@ Required fields are:
 
 
 ## Test Cases for Registration Page
-Create signup and login pages by assuming some client requirements, such as:
 
-- Username and password are mandatory fields
-- There is a cancel and reset button at the bottom of the form
-- Radio buttons and checkboxes are placed correctly
-- The Password limit should be 8-32 characters (alphanumeric).
+- Name, password, confirm password are mandatory fields
+- There is a Log in button at the bottom of the form to redirect to Log in page
+- A message is showed after user click on button Register
 
-| No. | Test Cases | Description | Steps To Execute | Test Data / Input  | Expected Results  |
+
+| No. | Test Cases | Description | Steps To Execute | Test Data / Input  | Expected Results  | 
 |-----|------------|-------------|------------------|--------------------|-------------------|
 | 1 | TC-01 | Check all the text boxes,  radio buttons, buttons, etc   | 1. Click on Radio buttons, buttons, and dropdowns | N/A | UI should be perfect |
 | 2 | TC-02 | Check the required fields by not filling any data  | 1. Do not enter any value in the field <br/> 2. Click on the Register button | N/A | It should show a mandatory symbol (`*`) on mandatory fields. |
