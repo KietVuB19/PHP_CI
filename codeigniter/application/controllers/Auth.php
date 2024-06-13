@@ -63,7 +63,7 @@ class Auth extends CI_Controller {
 		$total_try = $attempts_data->row();
 		if ($total_try && $total_try->attempts >= 5) {
             $last_attempt_time = strtotime($total_try->last_attempt);
-            $current_time = time();
+            $current_time = strtotime('+7 hours');;
             if (($current_time - $last_attempt_time) < 300) { 
                 $this->session->set_flashdata('msg',"Try again after 5 minutes");
 				redirect('Auth');

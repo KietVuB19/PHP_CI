@@ -11,8 +11,7 @@ class Auth_model extends CI_Model{
     }
 
     public function is_name_taken($name) {
-        $this->db->where('name', $name);
-        $query = $this->db->get('users');
+        $query = $this->get_users($name);
         return $query->num_rows() > 0;
     }
 
@@ -23,20 +22,16 @@ class Auth_model extends CI_Model{
     }
 
     public function logout_user(){
+        $this->session->unset_userdata('logged_in');
         $this->session->unset_userdata('log_in_name');
         $this->session->unset_userdata('role');
         $this->session->sess_destroy();
         redirect('Auth/');
     }
 
-    public function get_users(){
-        $query=$this->db->get('users');
-        if($query){
-            return $query->result_array();
-        }
-        else{
-            echo "Error: " .$this->db->error();
-        }
+    public function get_users($name){
+        $this->db->where('name', $name);
+        return $query=$this->db->get('users');
     }
 
     public function get_user_id($id){
@@ -53,13 +48,7 @@ class Auth_model extends CI_Model{
             $this->db->like('name',$search);    
         }
         $query = $this->db->get('users');
-        return $query->result_array();   
-    }
-
-    public function get_login_attempts($name) {
-        $this->db->where('name', $name);
-        $query = $this->db->get('users');
-        return $query->row();
+        return $query->result_array();  
     }
 
     public function time_update(){
@@ -69,7 +58,7 @@ class Auth_model extends CI_Model{
     }
 
     public function increase_login_attempts($name) {
-        $attempts_data = $this->get_login_attempts($name);
+        $attempts_data = $this->get_users($name)->row();
         $current_time=$this->time_update(); 
         if ($attempts_data) {
             $this->db->where('name', $name);
@@ -85,9 +74,10 @@ class Auth_model extends CI_Model{
 
     public function reset_login_attempts($name) {
         $current_time=$this->time_update(); 
-        $data = array('attempts'=>0,
-        'last_attempt' => $current_time
-    );
+        // $data = array('attempts'=>0);
+            $data = array('attempts'=>0,
+            'last_attempt' => $current_time
+        );
         $this->db->where('name', $name);
         $this->db->update('users',$data);
     }
