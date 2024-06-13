@@ -2,13 +2,14 @@ create database codeigniter;
 
 CREATE TABLE IF NOT EXISTS `users` (
     `id` int NOT NULL auto_increment,
-    `name` varchar(45),
-    `mail` varchar(45),
-    `password` varchar(45),
-    `roles` varchar(45),
+    `name` varchar(255) unique,
+    `email` varchar(255),
+    `password` varchar(255) NOT NULL,
+    `roles` varchar(255) NOT NULL,
     `status` Boolean default 1
     `attempts` int(11) NOT NULL,
     `last_attempt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	primary key (id),
     KEY `ci_sessions_timestamp` (`timestamp`)
 );
 
