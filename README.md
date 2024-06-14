@@ -47,7 +47,7 @@ sudo systemctl restart httpd
 <br><br>
 3. Function (currently):
 - 3.1. Register/Login/Logout with session
-    + Register: Duplicate name is not possible
+    + Register: Duplicate name is not possible, password match
     + Login: Log in fail 5 times in a row will lock the user for 5 mins
 - 3.2. Search user by name (for admin)
 - 3.3. Change status of an user: (if user status is disable: the user can not log in)
