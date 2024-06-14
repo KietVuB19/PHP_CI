@@ -1,18 +1,18 @@
-create database codeigniter;
+CREATE DATABASE codeigniter;
+
+USE codeigniter;
 
 CREATE TABLE IF NOT EXISTS `users` (
-    `id` int NOT NULL auto_increment,
-    `name` varchar(255) unique,
+    `id` int NOT NULL AUTO_INCREMENT,
+    `name` varchar(255) UNIQUE,
     `email` varchar(255),
     `password` varchar(255) NOT NULL,
     `roles` varchar(255) NOT NULL,
-    `status` Boolean default 1
+    `status` BOOLEAN DEFAULT 1,
     `attempts` int(11) NOT NULL,
     `last_attempt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	primary key (id),
-    KEY `ci_sessions_timestamp` (`timestamp`)
+    PRIMARY KEY (`id`)
 );
-
 
 CREATE TABLE IF NOT EXISTS `ci_sessions` (
     `id` varchar(40) NOT NULL,
