@@ -29,14 +29,14 @@
 							<?php echo form_open('Auth/login_form');?>
                            		<div class="mb-3">
 									<label class="mb-2 text-muted" for="name">Username</label>
-									<input id="name" type="name" class="form-control" name="name" value="" required autofocus>
+									<input id="name" type="name" class="form-control" name="name" value="<?php echo set_value('name', $this->session->flashdata('name')); ?>" required autofocus>
 									
 								</div>
 
 								<div class="mb-3">
 								
                                     <label class="mb-2 text-muted" for="password">Passsword</label>
-									<input id="password" type="password" class="form-control" name="password" required>
+									<input id="password" type="password" class="form-control" name="password" value="<?php echo set_value('password', $this->session->flashdata('password')); ?>" required>
 								  
 								</div>
 

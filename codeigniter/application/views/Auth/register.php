@@ -32,27 +32,22 @@
 							<?php echo form_open('Auth/registration_form');?>
                                 <div class="mb-3">
 									<label class="mb-2 text-muted" for="name">Full Name</label>
-									<input id="name" name="name" type="text" class="form-control" value="" required autofocus>
-									
+									<input id="name" name="name" type="text" class="form-control" value="<?php echo set_value('name', $this->session->flashdata('name')); ?>" required autofocus>
 								</div>
+								
 								<div class="mb-3">
 									<label class="mb-2 text-muted" for="email">E-Mail Address</label>
-									<input id="email" name="email" type="email" class="form-control" value="" required autofocus>
-									
+									<input id="email" name="email" type="email" class="form-control" value="<?php echo set_value('email',$this->session->flashdata('email')); ?>" required autofocus>
 								</div>
 
 								<div class="mb-3">
-								
                                     <label class="mb-2 text-muted" for="password">Passsword</label>
-									<input id="password" name="password" type="password" class="form-control" required>
-								  
+									<input id="password" name="password" type="password" class="form-control"  required>
 								</div>
 
-                                <div class="mb-3">
-								
+                                <div class="mb-3">						
                                     <label class="mb-2 text-muted" for="password">Confirm Passsword</label>
-									<input id="password" name="conPass" type="password" class="form-control"  required>
-								  
+									<input id="password" name="conPass" type="password" class="form-control"  required>	  
 								</div>
 
 								<div class="d-flex align-items-center">

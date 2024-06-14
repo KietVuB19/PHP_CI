@@ -13,21 +13,21 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
-		$this->session->sess_destroy();
 		$this->load->view('Auth/login');
 	}
 	
 	public function show_regis(){
-		$this->session->sess_destroy();
 		$this->load->view('Auth/register');
 	}
 
 	public function registration_form(){
-		// $this->load->view('Auth/register');
-		
+		$name=$this->input->post('name');
 		$password=$this->input->post('password');
         $conPassword=$this->input->post('conPass');
-        $name=$this->input->post('name');
+		$email=$this->input->post('email');
+
+		$this->session->set_flashdata('name', $name);
+		$this->session->set_flashdata('email', $email);
 
 		if ($this->Auth_model->is_name_taken($name)) {
             $this->session->set_flashdata('msg_regis_failed', 'Name is taken');
@@ -40,7 +40,7 @@ class Auth extends CI_Controller {
             $data=array(
                 "name"=>$name,
                 "password"=>$password,
-                "email"=>$this->input->post('email'),
+                "email"=>$email,
                 "roles"=>$roles,
 				"status"=>1,
             ); 
@@ -61,6 +61,9 @@ class Auth extends CI_Controller {
 		$name = $this->input->post('name');
         $password = $this->input->post('password');
 
+		$this->session->set_flashdata('name', $name);
+		$this->session->set_flashdata('password', $password);
+	
         $attempts_data = $this->Auth_model->get_users($name);
 		$total_try = $attempts_data->row();
 		if ($total_try && $total_try->attempts >= 5) {
