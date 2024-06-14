@@ -8,6 +8,7 @@
 	<title>Register page</title>
     <link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/all.css'; ?>">
 	<link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/toast/toast.min.css'; ?>">
+	<link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/pass_show.css'; ?>">
 	
  </head>
 
@@ -42,12 +43,22 @@
 
 								<div class="mb-3">
                                     <label class="mb-2 text-muted" for="password">Passsword</label>
-									<input id="password" name="password" type="password" class="form-control"  required>
+									<div class="input-group">	
+										<input id="password" name="password" type="password" class="form-control"  required>
+										<span class="input-group-text bg-white border-left-0" id="togglePassword" style="cursor: pointer;">
+											<i class="fa fa-eye"></i>
+										</span>
+									</div>
 								</div>
 
                                 <div class="mb-3">						
                                     <label class="mb-2 text-muted" for="password">Confirm Passsword</label>
-									<input id="password" name="conPass" type="password" class="form-control"  required>	  
+									<div class="input-group">	
+										<input id="conPass" name="conPass" type="password" class="form-control"  required>	  
+										<span class="input-group-text bg-white border-left-0" id="toggleConPassword" style="cursor: pointer;">
+											<i class="fa fa-eye"></i>
+										</span>
+									</div>
 								</div>
 
 								<div class="d-flex align-items-center">
@@ -69,6 +80,24 @@
 		</div>
 	</section>
 
-	<script src="js/login.js"></script>
+<script>
+	document.getElementById('togglePassword').addEventListener('click', function (e) {
+		const password = document.getElementById('password');
+		const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+		password.setAttribute('type', type);
+		this.querySelector('i').classList.toggle('fa-eye');
+		this.querySelector('i').classList.toggle('fa-eye-slash');
+	});
+
+	document.getElementById('toggleConPassword').addEventListener('click', function (e) {
+		const password = document.getElementById('conPass');
+		const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+		password.setAttribute('type', type);
+		this.querySelector('i').classList.toggle('fa-eye');
+		this.querySelector('i').classList.toggle('fa-eye-slash');
+	});
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </body>
 </html>

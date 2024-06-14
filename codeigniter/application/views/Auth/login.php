@@ -8,6 +8,8 @@
 	<title>Login page</title>
 	<link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/all.css'; ?>">
 	<link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/toast/toast.min.css'; ?>">
+	<link rel="stylesheet" href="<?php echo site_url() . 'Css_fold/pass_show.css'; ?>">
+	
 	<script src= "<?php echo site_url();?> css_fold/toast/jqm.js"></script>
 	<script src= "<?php echo site_url();?> css_fold/toast/toast.js"></script>
 </head>
@@ -30,14 +32,16 @@
                            		<div class="mb-3">
 									<label class="mb-2 text-muted" for="name">Username</label>
 									<input id="name" type="name" class="form-control" name="name" value="<?php echo set_value('name', $this->session->flashdata('name')); ?>" required autofocus>
-									
 								</div>
 
 								<div class="mb-3">
-								
-                                    <label class="mb-2 text-muted" for="password">Passsword</label>
-									<input id="password" type="password" class="form-control" name="password" value="<?php echo set_value('password', $this->session->flashdata('password')); ?>" required>
-								  
+									<label class="mb-2 text-muted" for="password">Passsword</label>
+									<div class="input-group">		
+										<input id="password" type="password" class="form-control" name="password" value="<?php echo set_value('password', $this->session->flashdata('password')); ?>" required>
+										<span class="input-group-text bg-white border-left-0" id="togglePassword" style="cursor: pointer;">
+											<i class="fa fa-eye"></i>
+										</span>
+									</div>
 								</div>
 
 								<div class="d-flex align-items-center">
@@ -59,6 +63,18 @@
 		</div>
 	</section>
 
-	<script src="js/login.js"></script>
+
+<script>
+	document.getElementById('togglePassword').addEventListener('click', function (e) {
+		const password = document.getElementById('password');
+		const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+		password.setAttribute('type', type);
+		
+		this.querySelector('i').classList.toggle('fa-eye');
+		this.querySelector('i').classList.toggle('fa-eye-slash');
+	});
+</script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </body>
 </html>
