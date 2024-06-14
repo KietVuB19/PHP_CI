@@ -74,7 +74,6 @@ class Auth_model extends CI_Model{
 
     public function reset_login_attempts($name) {
         $current_time=$this->time_update(); 
-        // $data = array('attempts'=>0);
             $data = array('attempts'=>0,
             'last_attempt' => $current_time
         );
