@@ -7,6 +7,8 @@ Required fields are:
 3. Confirm Password 
 4. Email
 
+</br>
+
 ## Test Cases for Registration Page
 
 - Name, password, confirm password are mandatory fields
