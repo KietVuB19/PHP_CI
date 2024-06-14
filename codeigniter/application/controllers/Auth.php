@@ -13,10 +13,12 @@ class Auth extends CI_Controller {
 
 	public function index()
 	{
+		$this->session->sess_destroy();
 		$this->load->view('Auth/login');
 	}
 	
 	public function show_regis(){
+		$this->session->sess_destroy();
 		$this->load->view('Auth/register');
 	}
 
@@ -28,7 +30,7 @@ class Auth extends CI_Controller {
         $name=$this->input->post('name');
 
 		if ($this->Auth_model->is_name_taken($name)) {
-            $this->session->set_flashdata('msg', 'Name is taken');
+            $this->session->set_flashdata('msg_regis_failed', 'Name is taken');
             redirect('Auth/register');
             return;
         }
@@ -43,11 +45,11 @@ class Auth extends CI_Controller {
 				"status"=>1,
             ); 
 			$this->Auth_model->register_user($data);    
-			$this->session->set_flashdata('msg_succ', 'Register success');
-            redirect('/Auth');
+			$this->session->set_flashdata('msg_regis_succ', 'Register success');
+            redirect('/Auth/register');
         }
         else{
-            $this->session->set_flashdata('msg', 'Passwords not match');
+            $this->session->set_flashdata('msg_regis_failed', 'Passwords not match');
             redirect('Auth/register');
             return;
         }

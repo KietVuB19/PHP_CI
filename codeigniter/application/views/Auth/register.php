@@ -19,11 +19,11 @@
 					<div class="text-center my-5">
 						<img src="logo.jpg" alt="logo" width="100">
 					</div>
-					<?php if ($this->session->flashdata('msg')): ?>
-						<p style="color: red; font-size:20px; text-align: center"><?= $this->session->flashdata('msg') ?></p>
+					<?php if ($this->session->flashdata('msg_regis_failed')): ?>
+						<p style="color: red; font-size:20px; text-align: center"><?= $this->session->flashdata('msg_regis_failed') ?></p>	
 					<?php endif; ?>
-					<?php if ($this->session->flashdata('msg_succ')): ?>
-						<p style="color: green; font-size:20px; text-align: center"><?= $this->session->flashdata('msg_succ') ?></p>
+					<?php if ($this->session->flashdata('msg_regis_succ')): ?>
+						<p style="color: green; font-size:20px; text-align: center"><?= $this->session->flashdata('msg_regis_succ') ?></p>						
 					<?php endif; ?>
 					<div class="card shadow-lg">
 						<div class="card-body p-5">
