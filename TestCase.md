@@ -1,16 +1,11 @@
 Author: KietVuB19  
-Date: 12/06/2024
+Start date: 12/06/2024
 
 Required fields are:
-1. ID 
-2. UserName
-3. Password
-4. Confirm Password 
-5. Roles
-6. Status
-7. Attempts
-8. Last_attempts
-
+1. UserName
+2. Password
+3. Confirm Password 
+4. Email
 
 ## Test Cases for Registration Page
 
