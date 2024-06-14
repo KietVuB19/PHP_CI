@@ -6,7 +6,9 @@
 - PHP: 8.2.20 (cli)
 - Codeigniter: 3.1.9
 - Composer: 2.7.6
-<br><br>
+
+</br>
+
 2. Setup guide:
 - 2.1. Create new project:   
 ```
@@ -44,7 +46,9 @@ sudo systemctl restart httpd
 ```
 - 2.6 Run project on browser (FireFox)
   + Type http://localhost on browser (you should see the codeigniter homepage)
-<br><br>
+
+</br>
+
 3. Function (currently):
 - 3.1. Register/Login/Logout with session
     + Register: Duplicate name is not possible, password match

@@ -126,7 +126,6 @@ class Auth extends CI_Controller {
 		if(!$this->session->userdata('logged_in')) {
 			redirect('Auth');	
 		}
-
 		if($this->session->userdata('role') != 'customer'){
 			redirect('Auth/admin_home');		
 		}
@@ -163,7 +162,7 @@ class Auth extends CI_Controller {
 				$status = 1;
 			}
 			else{
-				$status = 0;
+				$status =0;
 			}
 			$this->Auth_model->update_status($id, $status);
 		}
