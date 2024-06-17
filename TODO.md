@@ -1,7 +1,7 @@
 ## Register func:
 - Add username, password string format 6-15 character (No speacial character, including space)
 - correct the format of email: only accept knowm email: like gmail.com, yahoo.com, hotmail.com, etc..
-
+- Add func send email if register successfully
 
 ## Search Func
 - Fix Search function: keep the search keyword after admin change an user status so that the searched list not get refresh (dont have to type same search keyword again)
