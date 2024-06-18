@@ -45,7 +45,7 @@ sudo nano /etc/httpd/conf.d/codeigniter.conf
 sudo systemctl restart httpd  
 ```
 - 2.6 Run project on browser (FireFox)
-  + Type http://localhost on browser (you should see the codeigniter homepage)
+  + Type http://localhost on browser (you should see the Login homepage)
 
 </br>
 
