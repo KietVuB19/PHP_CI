@@ -27,17 +27,17 @@ sudo nano /etc/httpd/conf.d/codeigniter.conf
 - 2.4 Change file codeigniter.conf (file you open on 2.3):   
 ```
 <VirtualHost *:80>
-    ServerAdmin admin@example.com
+    ServerAdmin root
+    ServerName localhost
     DocumentRoot /var/www/html/codeigniter
-
-    <Directory /var/www/html/codeigniter>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
+   <Directory /var/www/html/codeigniter>
+    	AllowOverride all
+	Allow from all
+	Require all granted 
     </Directory>
 
-    ErrorLog /var/log/httpd/codeigniter_error.log
-    CustomLog /var/log/httpd/codeigniter_access.log combined
+    Errorlog /etc/httpd/logs/error_log
+    CustomLog /etc/httpd/logs/requests.log combined
 </VirtualHost>
 ```
 - 2.5 Restart apache
